@@ -1,0 +1,10 @@
+const mongoose = require('mongoose');
+const usuarioModel = require('./usuarioModel');
+
+const Schema = mongoose.Schema;
+
+const EquipeModel = new Schema({
+    id: Number,
+    criador: String,
+    integrantes: String // array de usuarios
+})

@@ -1,0 +1,15 @@
+const mongoose = require('mongoose')
+
+const Schema = mongoose.Schema;
+
+const TarefaModel = new Schema({
+    id: Number,
+    titulo: String,
+    descricao: String,
+    data_criacao: Date,
+    data_conclusao: Date,
+    feito: Boolean, // deixar fixo datas e o feito por padrão na requisição de salvar
+    // equipe: [] array de usuarios
+})
+
+module.exports = mongoose.model('tarefa', TarefaModel)
