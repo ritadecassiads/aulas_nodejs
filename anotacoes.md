@@ -1,8 +1,3 @@
-## Passos
-1. npm init -y | npm install moongose
-2. Criar arquivo servidor.js -> criar pastas controller, db, models e routes
-3. 
-
 ## Projeto
 -> Para cada entidade:
     - uma controller
@@ -43,3 +38,12 @@
 -> Equipe
     - criador
     - integrantes(usuarios)
+
+## Funcionalidades
+    - Criar login
+
+## Fazer depois
+    - array de equipes dentro de tarefas (perguntar pro professor)
+    - campo "integrantes" da equipe como array de usuario(perguntar pro professor)
+    - campo data de conclusao (ver formatação das datas)
+    - implementar gerador de id automatico

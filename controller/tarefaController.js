@@ -2,17 +2,23 @@ const tarefaModel = require('../models/tarefaModel')
 
 class TarefaController{
     async salvar(req, res){
-        const {id, titulo, descricao, data_conclusao} = req.body
+        const {titulo, descricao} = req.body
+        const busca = await tarefaModel.find({})
+        const id = busca.length + 1 // cria ids na sequencia em que for salva
+
         const tarefa = {
-            id,
+            id: id,
             titulo,
             descricao,
             data_criacao: new Date(),
-            data_conclusao: new Date(data_conclusao),
             feito: false, // false por padrão, so será mudado pra true quando for concluída
         }
         const resultado = await tarefaModel.create(tarefa)
-        res.json(resultado)
+
+        res.send({
+            message: "Tarefa cadastrado com sucesso!",
+            usuario: resultado
+        }) 
     }
 
     async listar(req, res){
@@ -31,7 +37,32 @@ class TarefaController{
         const tarefa = req.body
         const _id = (await tarefaModel.findOne({'id' : id}))._id;
         await tarefaModel.findByIdAndUpdate(String(_id), tarefa)
-        res.send("Tarefa atualizada!")
+        res.send({
+            message: "Tarefa atualizada com sucesso!",
+            usuario: tarefa
+        })
+    }
+
+    async atualizarFeita(req, res){
+        const id = req.params.id
+        const obj = req.body 
+        const tarefa = await tarefaModel.findOne({'id' : id})
+
+        // validando se o id existe na base antes de finalizar
+        if(!tarefa){ // se for igual a null vira true e se houver conteudo vira false
+            res.send("Essa tarefa não foi encontrada!")
+        } else {
+            if(obj.feito == true){
+                const _id = (await tarefaModel.findOne({'id' : id}))._id;
+                await tarefaModel.findByIdAndDelete(String(_id))
+                res.send({
+                    message: "Tarefa finalizada com sucesso!"
+                })
+            } else {
+                res.send("A tarefa não foi finalizada")
+            }
+            
+       }
     }
 
     async excluir(req, res){

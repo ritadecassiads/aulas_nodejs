@@ -7,8 +7,7 @@ const TarefaModel = new Schema({
     titulo: String,
     descricao: String,
     data_criacao: Date,
-    data_conclusao: Date,
-    feito: Boolean, // deixar fixo datas e o feito por padrão na requisição de salvar
+    feito: Boolean,
     // equipe: [] array de usuarios
 })
 
