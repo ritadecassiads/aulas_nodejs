@@ -7,6 +7,7 @@ router.post('/cadastro', usuarioController.cadastrar)
 router.get('/listar', usuarioController.listar)
 router.get('/listar/:id', usuarioController.buscarPorId)
 router.put('/atualizar/:id', usuarioController.atualizar)
+router.put('/addTarefa/:id', usuarioController.addTarefa)
 router.delete('/excluir/:id', usuarioController.excluir)
 
 module.exports = router

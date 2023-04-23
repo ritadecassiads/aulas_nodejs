@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
-const usuarioModel = require('./usuarioModel.js');
+const UsuarioSchema = require('./schemas/usuarioSchema')
+const TarefaSchema = require('./schemas/tarefaSchema')
 
 const Schema = mongoose.Schema;
 
 const EquipeModel = new Schema({
-    id: Number,
-    criador: String,
-    integrantes: String // array de usuarios - perguntar pro professor como fazer
+    idEquipe: Number,
+    tarefa: TarefaSchema,
+    integrantes: [UsuarioSchema]
 })
+
+module.exports = mongoose.model('equipe', EquipeModel)
