@@ -40,6 +40,9 @@ class equipeController{
     async atualizar(req, res){
         const id = req.params.id
         const equipe = req.body
+
+        const tarefa =  tarefaModel.findOne({'idTarefa': equipe.tarefa})
+        equipe.tarefa = tarefa
         const _id = (await equipeModel.findOne({'idEquipe' : id}))._id;
         await equipeModel.findByIdAndUpdate(String(_id), equipe)
         res.send({

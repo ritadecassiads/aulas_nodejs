@@ -74,15 +74,15 @@ class UsuarioController{
 
         const tarefa = await tarefaModel.find({'idTarefa' : body.tarefa})
         const usuario = await usuarioModel.findOne({'idUsuario' : id})
-        
-        // ajustar essa parte
-        if(usuario.tarefa == null){
+
+        // virá null quando for um usuario sem tarefas cadastradas, entao eu nego o nulo pra ficar true e entrar no primeiro bloco
+        // após a primeira inserção já tera um array de tarefas e entrará no segundo bloco
+        if(!usuario.tarefa){
             const _id = usuario._id 
             usuario.tarefa = tarefa
             const usuarioAtualizado = await usuarioModel.findByIdAndUpdate(String(_id), usuario)
             res.send({
-                message: "Tarefa adicionada a lista do usuario com sucesso!",
-                usuario: usuarioAtualizado
+                message: "Tarefa adicionada com sucesso!"
             })
         } else {
             const _id = usuario._id 
@@ -92,7 +92,7 @@ class UsuarioController{
                 // Se new for true então o documento modificado é retornado após a atualização ao invés do original, se false então o documento original é retornado
                 res.send({
                     message: "Tarefa adicionada a lista do usuario com sucesso!",
-                    usuario: usuarioAtualizado
+                    tarefas: usuarioAtualizado.tarefa
                 })
         }
             
