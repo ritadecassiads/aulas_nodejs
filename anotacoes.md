@@ -82,18 +82,20 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
         "tarefa": 3
     }
 
+## Melhorias
+    - Ordenar a data de conclusao para visualização
+
 ## Feito
     - OK array de equipes dentro de tarefas (perguntar pro professor)
     - OK campo "integrantes" da equipe como array de usuario(perguntar pro professor)
     - OK campo data de conclusao (ver formatação das datas)
     - OK ver gerador do codigo do professor
 ## Fazer depois
+    - refatorar para retorno so ter dados necessarios
     - validar nome de login(não permitir nomes iguais)
     - fazer validação pra mesma tarefa nao ser adiconada a lista duas vezes(função que percorre o array)
-    - fazer validação para quando for a primeira tarefa cadastrada do usuario(não usar o addTarefa quando a "tarefa" estiver null)
-    - refatorar para retorno so ter dados necessarios
-    - verificar problema no addTarefa do usuario
-    - atualizar equipes: não consegui alterar as equipes - verificar
 
-## Melhorias
-    - Ordenar a data de conclusao para visualização
+# Prioridades / bugs
+        - fazer validação para quando for a primeira tarefa cadastrada do usuario(não usar o addTarefaquando a "tarefa" estiver null)
+            - verificar problema no addTarefa do usuario    
+        - atualizar equipes: não consegui alterar as equipes - verificar
