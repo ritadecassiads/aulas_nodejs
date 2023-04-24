@@ -33,51 +33,27 @@ class equipeController{
 
     async buscarPorId(req, res){
         const id = req.params.id
-        const equipe = await equipeModel.findOne({'id': id})
+        const equipe = await equipeModel.findOne({'idEquipe': id})
         res.json(equipe)
     }
 
     async atualizar(req, res){
         const id = req.params.id
         const equipe = req.body
-        const _id = (await equipeModel.findOne({'idequipe' : id}))._id;
+        const _id = (await equipeModel.findOne({'idEquipe' : id}))._id;
         await equipeModel.findByIdAndUpdate(String(_id), equipe)
         res.send({
-            message: "equipe atualizada com sucesso!",
-            usuario: equipe
+            message: "Equipe atualizada com sucesso!",
+            equipe: equipe
         })
-    }
-
-    async atualizarFeita(req, res){
-        const id = req.params.id
-        const obj = req.body // passando 'feito: true' no body e finalizando a equipe
-        const equipe = await equipeModel.findOne({'idequipe' : id})
-
-        // validando se o id existe na base antes de finalizar
-        if(!equipe){ // se for igual a null vira true e se houver conteudo vira false
-            res.send({
-                message: "Essa equipe não foi encontrada!"
-            })
-        } else {
-            if(obj.feito == true){
-                const _id = (await equipeModel.findOne({'idequipe' : id}))._id;
-                await equipeModel.findByIdAndUpdate(String(_id))
-                res.send({
-                    message: "equipe finalizada com sucesso!"
-                })
-            } else {
-                res.send({
-                    message: "A equipe não foi finalizada"})
-            }    
-       }
     }
 
     async excluir(req, res){
         const id = req.params.id
-        const _id = (await equipeModel.findOne({'idequipe' : id}))._id;
+        const _id = (await equipeModel.findOne({'idEquipe' : id}))._id;
         await equipeModel.findByIdAndDelete(String(_id))
         res.send({
-            message: "equipe excluída!"
+            message: "Equipe excluída!"
         })
     }
 

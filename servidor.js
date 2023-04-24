@@ -16,8 +16,8 @@ servidor.use('/tarefas', tarefaRouter) // sempre que a rota for /tarefas ele vai
 servidor.use('/usuarios', usuarioRouter)
 servidor.use('/equipe', equipeRouter)
 
-servidor.listen(3000,
+servidor.listen(5000,
     function(){
-        console.log("Servidor rodando na porta 3000")
+        console.log("Servidor rodando na porta 5000")
     }  
 )

@@ -41,20 +41,6 @@
     - criador
     - integrantes(usuarios)
 
-## Funcionalidades
-    - Criar login
-
-## Fazer depois
-    - OK array de equipes dentro de tarefas (perguntar pro professor)
-    - OK campo "integrantes" da equipe como array de usuario(perguntar pro professor)
-    - OK campo data de conclusao (ver formatação das datas)
-
-    - validar se o nome de login(não permitir nomes iguais)
-    - atrelar cada tarefa ao usuario que criou(perguntar pro professor como da pra fazer)
-    - ver gerador do codigo do professor
-    - fazer validação pra mesma tarefa nao ser adiconada a lista duas vezes
-    - fazer validação para quando for a primeira tarefa cadastrada do usuario(não usar o addTarefa quando a "tarefa" estiver null)
-
 ## Ver no material
     - fazer o relacionamento um para um 
     - muitos para muitos
@@ -66,7 +52,6 @@
     - usar o valor do idTarefa para cadastrar objetos que se referenciam a outros
 
 -> Usuario podem ser associados a tarefas e equipes associadas a usuarios e tarefas
-
 
 ## Json usados
 # Usuario - cadastrar
@@ -91,6 +76,24 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
     - posso criar um usuario sem tarefa
 
 -> Atualizar/id atrelando a tarefa ao usuario
+    - atualizar apenas altera o valor
+    - irá sempre substituir a tarefa ja existente, usar addTarefa para incrementar na lista
     {
         "tarefa": 3
     }
+
+## Feito
+    - OK array de equipes dentro de tarefas (perguntar pro professor)
+    - OK campo "integrantes" da equipe como array de usuario(perguntar pro professor)
+    - OK campo data de conclusao (ver formatação das datas)
+    - OK ver gerador do codigo do professor
+## Fazer depois
+    - validar nome de login(não permitir nomes iguais)
+    - fazer validação pra mesma tarefa nao ser adiconada a lista duas vezes(função que percorre o array)
+    - fazer validação para quando for a primeira tarefa cadastrada do usuario(não usar o addTarefa quando a "tarefa" estiver null)
+    - refatorar para retorno so ter dados necessarios
+    - verificar problema no addTarefa do usuario
+    - atualizar equipes: não consegui alterar as equipes - verificar
+
+## Melhorias
+    - Ordenar a data de conclusao para visualização

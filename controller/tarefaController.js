@@ -12,7 +12,7 @@ class TarefaController{
             idTarefa: obj == null ? 1 : obj.idTarefa + 1,
             titulo,
             descricao,
-            data_criacao: new Date(),
+            data_criacao: new Date(), // instancia a data atual da requisicao
             data_conclusao: new Date(data_conclusao),
             feito: false, // false por padrão, so será mudado pra true quando for concluída
         }
@@ -42,13 +42,13 @@ class TarefaController{
         await tarefaModel.findByIdAndUpdate(String(_id), tarefa)
         res.send({
             message: "Tarefa atualizada com sucesso!",
-            usuario: tarefa
+            tarefa: tarefa
         })
     }
 
     async atualizarFeita(req, res){
         const id = req.params.id
-        const obj = req.body // passando 'feito: true' no body e finalizando a tarefa
+        const obj = req.body // passando 'feito: true' no body
         const tarefa = await tarefaModel.findOne({'idTarefa' : id})
 
         // validando se o id existe na base antes de finalizar
@@ -58,12 +58,15 @@ class TarefaController{
             })
         } else {
             if(obj.feito == true){
-                const _id = (await tarefaModel.findOne({'idTarefa' : id}))._id;
-                await tarefaModel.findByIdAndUpdate(String(_id))
+                // atualiza valor do "feito" de acordo com o que vem do body da requisição
+                const _id = tarefa._id;
+                await tarefaModel.findByIdAndUpdate(String(_id), obj)
                 res.send({
                     message: "Tarefa finalizada com sucesso!"
                 })
             } else {
+                const _id = tarefa._id;
+                await tarefaModel.findByIdAndUpdate(String(_id), obj)
                 res.send({
                     message: "A tarefa não foi finalizada"})
             }    
