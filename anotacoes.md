@@ -94,6 +94,8 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
         - OK verificar problema no addTarefa do usuario
     - OK atualizar equipes: não consegui alterar as equipes - verificar
     - OK não deixar cadastrar a tarefa com o mesmo nome
+    - OK não deixar cadastrar o mesmo usuario(login)
+    - OK equipe: consertar deixar salvar com [] de integrantes vazio
 
 ## Fazer depois
     - refatorar para retorno so trazer dados necessarios
@@ -102,14 +104,16 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
     - validação para não poder cadastrar uma equipe sem integrantes
     - testar se ta tudo certinho
 
--> Usuario
-    - não deixar cadastrar o mesmo usuario(login)
+-> Usuario 
+    - adicionar try e catch em todas as chamadas
+    
 
 -> Tarefa
-    
+    - adicionar try e catch em todas as chamadas 
 
 -> Equipe
     - não deixar cadastrar um equipe com as mesmas caracteristicas
-    - consertar deixar salvar com [] de integrantes vazio
+    - adicionar try e catch em todas as chamadas 
+    
 
 ### Prioridades / bugs ###

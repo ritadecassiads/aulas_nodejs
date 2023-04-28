@@ -11,22 +11,33 @@ class UsuarioController{
                     message: "Falta informações de nome, username ou senha!"
                 }) 
             } else {
-                // gerador de id
-                const obj = await usuarioModel.findOne({}).sort({'idUsuario': -1});  // encontra um, faz o sort para ordenar 1 crescente e -1 decrescente       
-                usuario.idUsuario = obj == null ? 1 : obj.idUsuario + 1; // quando for o primeiro o id será 1, após isso será sempre id+1
+                const usuarioComparado = await usuarioModel.find({ 'username': usuario.username })
                 
-                usuario.logado = false // criado como false por padrao
-        
-                // importo a tarefaModel, encontro o id dela e comparo com o id que mandei no body da requisição
-                // opcional: mandar a tarefa ao cadastrar usuario
-                const tarefa = await tarefaModel.findOne({'idTarefa': usuario.tarefa})
-                usuario.tarefa = tarefa
-        
-                const resultado = await usuarioModel.create(usuario)
-                res.send({
-                    message: "Usuario cadastrado com sucesso!",
-                    usuario: resultado
-                }) 
+                // se o array de usuarios for maior que 0 é pq existe um usuario com o mesmo titulo
+                if(usuarioComparado.length > 0){
+                    return res.send({
+                        message: "Usuário já cadastrado no banco!"
+                    })
+                } else {
+                    // gerador de id
+                    const obj = await usuarioModel.findOne({}).sort({'idUsuario': -1});  // encontra um, faz o sort para ordenar 1 crescente e -1 decrescente       
+                    usuario.idUsuario = obj == null ? 1 : obj.idUsuario + 1; // quando for o primeiro o id será 1, após isso será sempre id+1
+                    
+                    usuario.logado = false // criado como false por padrao
+            
+                    // importo a tarefaModel, encontro o id dela e comparo com o id que mandei no body da requisição
+                    // opcional: mandar a tarefa ao cadastrar usuario
+                    const tarefa = await tarefaModel.findOne({'idTarefa': usuario.tarefa})
+                    usuario.tarefa = tarefa
+            
+                    const resultado = await usuarioModel.create(usuario)
+                    res.send({
+                        message: "Usuario cadastrado com sucesso!",
+                        usuario: resultado
+                    }) 
+
+                }
+
             }
         } catch (error) {
             res.send({

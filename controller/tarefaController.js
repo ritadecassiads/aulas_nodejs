@@ -15,9 +15,8 @@ class TarefaController {
             } else {
                 // encontrando tarefa no banco | comparo o titulo enviado no body com o titulo de cada tarefa cadastrada
                 const tarefaComparada = await tarefaModel.find({ 'titulo': titulo })
-                console.log("TESTE ----->", tarefaComparada)
 
-                // se o array de tarefas for maior que 0 é pq existe uma tarefa com o mesmo nome do titulo
+                // se o array de tarefas for maior que 0 é pq existe uma tarefa com o mesmo titulo
                 if (tarefaComparada.length > 0) {
                     return res.send({
                         message: "Tarefa já cadastrada no banco!"

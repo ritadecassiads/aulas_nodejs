@@ -29,11 +29,11 @@ class equipeController {
                     // validando se a tarefa e o usuario existem no banco, se houver dados cai no else
                     if (!tarefa) {
                         res.send({
-                            message: "Tarefa não existe na base!"
+                            message: "Tarefa não existe no banco!"
                         })
                     } else if (usuario.length == 0) {
                         res.send({
-                            message: "Usuário(s) não existe na base!"
+                            message: "Usuário(s) não existe no banco!"
                         })
                     } else {
                         // gera o id
