@@ -4,6 +4,14 @@ class UsuarioController{
     async cadastrar(req, res){
         const usuario = req.body
 
+        try {
+            if(!usuario.nome || !usuario.username || !usuario.senha){
+                
+            }
+        } catch (error) {
+            
+        }
+
         // gerador de id
         const obj = await usuarioModel.findOne({}).sort({'idUsuario': -1});  // encontra um, faz o sort para ordenar 1 crescente e -1 decrescente       
         usuario.idUsuario = obj == null ? 1 : obj.idUsuario + 1; // quando for o primeiro o id será 1, após isso será sempre id+1
