@@ -117,3 +117,7 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
     
 
 ### Prioridades / bugs ###
+
+## Duvidas:
+    - tem necessidade de usar try e catch em todos os metodos?
+    - explicação melhor sobre a necessidade do schema
