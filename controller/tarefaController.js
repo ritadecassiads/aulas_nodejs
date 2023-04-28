@@ -1,44 +1,71 @@
 // controller = mediar o que acontece
 // metodos que farao o CRUD 
 const tarefaModel = require('../models/tarefaModel')
-class TarefaController{
-    async salvar(req, res){
-        const {titulo, descricao, data_conclusao} = req.body
 
-        // gerador de id
-        const obj = await tarefaModel.findOne({}).sort({'idTarefa': -1});  // encontra um, faz o sort para ordenar 1 crescente e -1 decrescente
+class TarefaController {
+    async salvar(req, res) {
+        const { titulo, descricao, data_conclusao } = req.body
 
-        const tarefa = {
-            idTarefa: obj == null ? 1 : obj.idTarefa + 1,
-            titulo,
-            descricao,
-            data_criacao: new Date(), // instancia a data atual da requisicao
-            data_conclusao: new Date(data_conclusao),
-            feito: false, // false por padrão, so será mudado pra true quando for concluída
+        try {
+            // validando se existe titulo no body
+            if (!titulo) {
+                res.send({
+                    message: "Titulo deve ser preenchido!"
+                })
+            } else {
+                // encontrando tarefa no banco | comparo o titulo enviado no body com o titulo de cada tarefa cadastrada
+                const tarefaComparada = await tarefaModel.find({ 'titulo': titulo })
+                console.log("TESTE ----->", tarefaComparada)
+
+                // se o array de tarefas for maior que 0 é pq existe uma tarefa com o mesmo nome do titulo
+                if (tarefaComparada.length > 0) {
+                    return res.send({
+                        message: "Tarefa já cadastrada no banco!"
+                    })
+                } else {
+                    // gerador de id
+                    const obj = await tarefaModel.findOne({}).sort({ 'idTarefa': -1 });  // encontra um, faz o sort para ordenar 1 crescente e -1 decrescente
+
+                    const tarefa = {
+                        idTarefa: obj == null ? 1 : obj.idTarefa + 1,
+                        titulo,
+                        descricao,
+                        data_criacao: new Date(), // instancia a data atual da requisicao
+                        data_conclusao: new Date(data_conclusao),
+                        feito: false, // false por padrão, so será mudado pra true quando for concluída
+                    }
+
+                    const resultado = await tarefaModel.create(tarefa)
+
+                    res.send({
+                        message: "Tarefa cadastrada com sucesso!",
+                        tarefa: resultado
+                    })
+                }
+            }
+        } catch (error) {
+            console.error(error)
+            res.send({
+                message: "Não foi possível cadastrar a tarefa!"
+            })
         }
-        const resultado = await tarefaModel.create(tarefa)
-
-        res.send({
-            message: "Tarefa cadastrada com sucesso!",
-            tarefa: resultado
-        }) 
     }
 
-    async listar(req, res){
+    async listar(req, res) {
         const tarefas = await tarefaModel.find({}) // chaves vazias sem parametros = find tudo
         res.json(tarefas)
     }
 
-    async buscarPorId(req, res){
+    async buscarPorId(req, res) {
         const id = req.params.id
-        const tarefa = await tarefaModel.findOne({'idTarefa': id})
+        const tarefa = await tarefaModel.findOne({ 'idTarefa': id })
         res.json(tarefa)
     }
 
-    async atualizar(req, res){
+    async atualizar(req, res) {
         const id = req.params.id
         const tarefa = req.body
-        const _id = (await tarefaModel.findOne({'idTarefa' : id}))._id;
+        const _id = (await tarefaModel.findOne({ 'idTarefa': id }))._id;
         await tarefaModel.findByIdAndUpdate(String(_id), tarefa)
         res.send({
             message: "Tarefa atualizada com sucesso!",
@@ -46,18 +73,18 @@ class TarefaController{
         })
     }
 
-    async atualizarFeita(req, res){
+    async atualizarFeita(req, res) {
         const id = req.params.id
         const obj = req.body // passando 'feito: true' no body
-        const tarefa = await tarefaModel.findOne({'idTarefa' : id})
+        const tarefa = await tarefaModel.findOne({ 'idTarefa': id })
 
         // validando se o id existe na base antes de finalizar
-        if(!tarefa){ // se for igual a null vira true e se houver conteudo vira false
+        if (!tarefa) { // se for igual a null vira true e se houver conteudo vira false
             res.send({
                 message: "Essa tarefa não foi encontrada!"
             })
         } else {
-            if(obj.feito == true){
+            if (obj.feito == true) {
                 // atualiza valor do "feito" de acordo com o que vem do body da requisição
                 const _id = tarefa._id;
                 await tarefaModel.findByIdAndUpdate(String(_id), obj)
@@ -68,14 +95,15 @@ class TarefaController{
                 const _id = tarefa._id;
                 await tarefaModel.findByIdAndUpdate(String(_id), obj)
                 res.send({
-                    message: "A tarefa não foi finalizada"})
-            }    
-       }
+                    message: "A tarefa não foi finalizada"
+                })
+            }
+        }
     }
 
-    async excluir(req, res){
+    async excluir(req, res) {
         const id = req.params.id
-        const _id = (await tarefaModel.findOne({'idTarefa' : id}))._id;
+        const _id = (await tarefaModel.findOne({ 'idTarefa': id }))._id;
         await tarefaModel.findByIdAndDelete(String(_id))
         res.send({
             message: "Tarefa excluída!"

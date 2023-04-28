@@ -93,18 +93,20 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
     - OK fazer validação para quando for a primeira tarefa cadastrada do usuario(não usar o addTarefaquando a "tarefa" estiver null)
         - OK verificar problema no addTarefa do usuario
     - OK atualizar equipes: não consegui alterar as equipes - verificar
+    - OK não deixar cadastrar a tarefa com o mesmo nome
 
 ## Fazer depois
     - refatorar para retorno so trazer dados necessarios
     - tratar os erros
     - fazer validação pra mesma tarefa nao ser adiconada a lista duas vezes(função que percorre o array)
     - validação para não poder cadastrar uma equipe sem integrantes
+    - testar se ta tudo certinho
 
 -> Usuario
     - não deixar cadastrar o mesmo usuario(login)
 
 -> Tarefa
-    - não deixar cadastrar a tarefa com o mesmo nome
+    
 
 -> Equipe
     - não deixar cadastrar um equipe com as mesmas caracteristicas
