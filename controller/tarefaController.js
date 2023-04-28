@@ -43,7 +43,6 @@ class TarefaController {
                 }
             }
         } catch (error) {
-            console.error(error)
             res.send({
                 message: "Não foi possível cadastrar a tarefa!"
             })

@@ -12,7 +12,7 @@ class UsuarioController{
                 }) 
             } else {
                 const usuarioComparado = await usuarioModel.find({ 'username': usuario.username })
-                
+
                 // se o array de usuarios for maior que 0 é pq existe um usuario com o mesmo titulo
                 if(usuarioComparado.length > 0){
                     return res.send({
@@ -120,22 +120,6 @@ class UsuarioController{
                     tarefas: usuarioAtualizado.tarefa
                 })
         }
-            
-
-        // verificar se a tarefa já existe na lista do usuario
-        // if(tarefa == usuario.tarefa){
-        //     return res.send({
-        //         message: "Essa tarefa já foi adicionada a lista!"
-        //     })
-        // } else {
-        //     const usuarioAtualizado = await usuarioModel.findByIdAndUpdate(_id, {$push: {tarefa: tarefa}}, 
-        //         {upsert: true, new: true})
-           
-        //     res.send({
-        //         message: "Tarefa adicionada a lista do usuario com sucesso!",
-        //         usuario: usuarioAtualizado
-        //     })
-        // }
     }
 
     async excluir(req, res){

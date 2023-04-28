@@ -56,7 +56,7 @@ class equipeController {
 
         } catch (error) {
             res.send({
-                message: "Não foi possível cadastrar a equipe. Verifique os dados preenchidos!"
+                message: "Não foi possível cadastrar a equipe!"
             })
         }
     }
