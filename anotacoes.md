@@ -15,6 +15,10 @@
         - muitos para muitos: ideia de um criador de tarefas e uma equipe que pode gerenciar a tarefa
         - equipe: entidade que vincula varios usuarios
 
+## MongoDB
+- startar o servidor mongo: sudo systemctl start mongod
+- ver se ta rodando: sudo systemctl status mongod
+
 ## A mais
 -> async: ajuda no processamento, faz a requisicao de forma assincrona, enquanto a resposta nao vem do servidor eu libero o processador | ajuda a não ocupar espaço na memoria do processador | nao trava recurso do processador
 ## Entidades(pense como se fosse uma classe)
@@ -106,10 +110,11 @@ obs: posso associar o usuario a tarefa tanto pelo cadastro como pela alteração
 
 -> Usuario 
     - adicionar try e catch em todas as chamadas
-    
+    - fazer rota para excluir a tarefa do usuario    
 
 -> Tarefa
     - adicionar try e catch em todas as chamadas 
+    - ao excluir a tarefa excluir de todos os usuarios
 
 -> Equipe
     - não deixar cadastrar um equipe com as mesmas caracteristicas
