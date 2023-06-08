@@ -12,7 +12,11 @@ class TarefaController {
                 res.send({
                     message: "Titulo deve ser preenchido!"
                 })
-            } else {
+            } else if(!data_conclusao){
+                res.send({
+                    message: "Data deve ser preenchida!"
+                })
+            }{
                 // encontrando tarefa no banco | comparo o titulo enviado no body com o titulo de cada tarefa cadastrada
                 const tarefaComparada = await tarefaModel.find({ 'titulo': titulo })
 
