@@ -6,10 +6,7 @@ const cors = require("cors");
 const servidor = express() // inicialização do express
 servidor.use(express.json()); // solicitações recebidas em json
 
-<<<<<<< HEAD
 // aceita requisição de qualquer IP
-=======
->>>>>>> 5ea8293f46fa0a375f5eeee6e1d175afb44b4fd3
 servidor.use(cors());
 
 // mapear as rotas de cada entidade aqui no servidor
